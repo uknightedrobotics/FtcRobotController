@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -20,16 +19,14 @@ import org.firstinspires.ftc.teamcode.mechanisms.MecanumDrive;
 
 
 @TeleOp
-public class TeleOpBlue extends OpMode {
+public class BIOBUZZTeleOp extends OpMode {
     MecanumDrive drive = new MecanumDrive(); //call class
     double forward, strafe, rotate;
-    private DcMotor intake;
-    private DcMotor shooting;
     private IMU imu;
+
+    /*
     private Limelight3A limelight;
     private CRServo turretServo;
-    private DcMotor left_transfer;
-    private DcMotor right_transfer;
 
     double error;
     double last_error = 0.0;
@@ -41,64 +38,28 @@ public class TeleOpBlue extends OpMode {
     double[] errorArr = new double[5];
     int count = 0;
     double sum;
-
-    FtcDashboard dashboard = FtcDashboard.getInstance();
+     */
 
 
 
     @Override
     public void init(){
-
-        //init turret
-        turretServo = hardwareMap.get(CRServo.class,"turretServo");
-
-        //init drive/imu
-        drive.init(hardwareMap);
-
-
-        //init motors
-        intake = hardwareMap.get(DcMotor.class,"intake");
-
-        intake.setDirection(DcMotor.Direction.FORWARD);
-
-        intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        shooting = hardwareMap.get(DcMotorEx.class, "shooting");
-
-        shooting.setDirection(DcMotor.Direction.FORWARD);
-
-        shooting.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        left_transfer = hardwareMap.get(DcMotor.class,"left_transfer");
-
-        left_transfer.setDirection(DcMotorSimple.Direction.FORWARD);
-
-        left_transfer.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        right_transfer = hardwareMap.get(DcMotor.class, "right_transfer");
-
-        right_transfer.setDirection(DcMotor.Direction.FORWARD);
-
-        right_transfer.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        /*
         //init limelight
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.pipelineSwitch(9); //9 = blue apriltag (20)
+         */
 
         imu = hardwareMap.get(IMU.class,"imu");
         RevHubOrientationOnRobot revHubOrientationOnRobot = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
 
         imu.initialize(new IMU.Parameters(revHubOrientationOnRobot));
-
-
-
-
     }
 
     @Override
     public void start(){
-        limelight.start(); //if theres delay then put it into init but it drains battery
+        //limelight.start(); //if theres delay then put it into init but it drains battery
     }
 
     @Override
@@ -113,14 +74,7 @@ public class TeleOpBlue extends OpMode {
 
         drive.driveFieldRelative(forward, strafe, rotate);
 
-
-        //intake
-        double right_trigger = gamepad1.right_trigger;
-        intake.setPower(right_trigger);
-
-        telemetry.addData("Right Trigger", right_trigger);
-
-
+    /*
         //apriltag recognition/telemetry
         YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
         limelight.updateRobotOrientation(orientation.getYaw());
@@ -237,7 +191,7 @@ public class TeleOpBlue extends OpMode {
         if(yButton){
             imu.resetYaw();
         }
-
+    */
 
         /*
         TelemetryPacket packet = new TelemetryPacket(); //create a new packet each loop
